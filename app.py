@@ -4,13 +4,8 @@ import logging
 from pythonjsonlogger import jsonlogger
 import uuid
 from datetime import datetime
-import os
 
 app = Flask(__name__)
-
-# === Ensure logs directory exists ===
-if not os.path.exists('logs'):
-    os.makedirs('logs')  # Create logs directory if it doesn't exist
 
 # === Structured JSON Logger Setup ===
 logger = logging.getLogger("flask-logger")
@@ -18,9 +13,7 @@ logger.setLevel(logging.INFO)
 
 # Create formatter and handlers
 formatter = jsonlogger.JsonFormatter('%(asctime)s %(levelname)s %(message)s')
-
-# Log to the app's logs directory
-log_handler = logging.FileHandler("logs/app.log")  # Logs will go to /app/logs/app.log in the container
+log_handler = logging.FileHandler("logs/app.log")  # Inside the app directory
 log_handler.setFormatter(formatter)
 
 # Add file handler to logger
