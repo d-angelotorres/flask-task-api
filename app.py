@@ -4,6 +4,9 @@ import logging
 from pythonjsonlogger import jsonlogger
 import uuid
 from datetime import datetime
+import os
+
+os.makedirs("logs", exist_ok=True)
 
 app = Flask(__name__)
 
@@ -13,8 +16,6 @@ logger.setLevel(logging.INFO)
 
 # Create formatter and handlers
 formatter = jsonlogger.JsonFormatter('%(asctime)s %(levelname)s %(message)s')
-import os
-os.makedirs("logs", exist_ok=True)
 log_handler = logging.FileHandler("logs/app.log")  # Inside the app directory
 log_handler.setFormatter(formatter)
 
@@ -112,10 +113,12 @@ def delete_task(task_id):
         )
     return jsonify({'message': f'Task {task_id} deleted successfully'})
 
+
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({"message": "Flask API is running"}), 200
   
+
 # === App Runner ===
 
 if __name__ == '__main__':
