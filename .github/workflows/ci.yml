@@ -38,3 +38,11 @@ jobs:
           sleep 5
           curl http://localhost:5050
           docker stop flask-container
+
+      - name: Wait until Flask app is ready
+        run: |
+          for i in {1..10}; do
+            curl --silent localhost:5050/tasks && break
+            echo "Waiting for Flask app to be ready..."
+            sleep 2
+          done
