@@ -38,7 +38,7 @@ jobs:
 
           for i in {1..10}; do
             echo "Attempt $i: Checking if Flask is up..."
-            if curl --silent localhost:5050/tasks; then
+            if curl --silent localhost:5050/; then
               echo "✅ Flask is up!"
               break
             fi
