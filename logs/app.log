@@ -1,0 +1,11 @@
+{"asctime": "2025-04-17 15:04:07,328", "levelname": "INFO", "message": "\ud83d\ude80 Starting Flask server on http://0.0.0.0:5050"}
+{"asctime": "2025-04-17 15:04:07,450", "levelname": "INFO", "message": "\ud83d\ude80 Starting Flask server on http://0.0.0.0:5050"}
+{"asctime": "2025-04-17 15:06:16,910", "levelname": "INFO", "message": "\ud83d\ude80 Starting Flask server on http://0.0.0.0:5050"}
+{"asctime": "2025-04-17 15:06:17,019", "levelname": "INFO", "message": "\ud83d\ude80 Starting Flask server on http://0.0.0.0:5050"}
+{"asctime": "2025-04-17 15:06:40,208", "levelname": "INFO", "message": "GET request received", "endpoint": "/tasks", "method": "GET", "user_id": "dd4c406d", "timestamp": "2025-04-17T15:06:40.207720"}
+{"asctime": "2025-04-17 15:07:40,659", "levelname": "INFO", "message": "POST request received", "endpoint": "/tasks", "method": "POST", "user_id": "1d0ee9ef", "timestamp": "2025-04-17T15:07:40.659733"}
+{"asctime": "2025-04-17 15:07:40,661", "levelname": "INFO", "message": "New task created", "endpoint": "/tasks", "method": "POST", "user_id": "6d920d3f", "timestamp": "2025-04-17T15:07:40.661822", "task": {"id": 3, "title": "Finish this assignment", "done": false}}
+{"asctime": "2025-04-17 15:07:42,734", "levelname": "INFO", "message": "GET request received", "endpoint": "/tasks", "method": "GET", "user_id": "729f54e6", "timestamp": "2025-04-17T15:07:42.734880"}
+{"asctime": "2025-04-17 15:07:46,386", "levelname": "INFO", "message": "DELETE request received for task 3", "endpoint": "/tasks/3", "method": "DELETE", "user_id": "e6f55cd1", "timestamp": "2025-04-17T15:07:46.386384"}
+{"asctime": "2025-04-17 15:07:46,387", "levelname": "INFO", "message": "Task 3 deleted successfully", "endpoint": "/tasks/3", "method": "DELETE", "user_id": "4cef63e7", "timestamp": "2025-04-17T15:07:46.387230"}
+{"asctime": "2025-04-17 15:07:48,539", "levelname": "INFO", "message": "GET request received", "endpoint": "/tasks", "method": "GET", "user_id": "e1091225", "timestamp": "2025-04-17T15:07:48.538998"}
