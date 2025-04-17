@@ -50,6 +50,7 @@ def hello():
     return "Welcome to the Task API!"
 
 
+
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     logger.info(
@@ -75,13 +76,17 @@ def create_task():
         'done': False
     }
     tasks.append(new_task)
-    logger.info("New task created", extra={**log_context("/tasks"), "task": new_task})
+    logger.info(
+        "New task created", extra={**log_context("/tasks"), "task": new_task}
+        )
     return jsonify(new_task), 201
 
 
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
-    logger.info(f"DELETE request received for task {task_id}", extra=log_context(f"/tasks/{task_id}"))
+    logger.info(
+        f"DELETE request received for task {task_id}", extra=log_context(f"/tasks/{task_id}")
+        )
     task_to_delete = next((task for task in tasks if task['id'] == task_id), None)
 
     if not task_to_delete:
@@ -89,7 +94,9 @@ def delete_task(task_id):
         return jsonify({'error': 'Task not found'}), 404
 
     tasks.remove(task_to_delete)
-    logger.info(f"Task {task_id} deleted successfully", extra=log_context(f"/tasks/{task_id}"))
+    logger.info(
+        f"Task {task_id} deleted successfully", extra=log_context(f"/tasks/{task_id}")
+        )
     return jsonify({'message': f'Task {task_id} deleted successfully'})
 
 
