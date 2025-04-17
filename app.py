@@ -5,6 +5,7 @@ from pythonjsonlogger import jsonlogger
 import uuid
 from datetime import datetime
 import os
+import psutil
 
 os.makedirs("logs", exist_ok=True)
 
@@ -44,6 +45,14 @@ def log_context(endpoint):
         "user_id": str(uuid.uuid4())[:8],
         "timestamp": datetime.utcnow().isoformat()
     }
+
+# === Monitor resources before each request ===
+@app.before_request
+def log_resource_usage():
+    process = psutil.Process()
+    cpu = process.cpu_percent(interval=None)
+    mem = process.memory_info().rss / (1024 * 1024)  # in MB
+    logger.info(f"📊 CPU: {cpu:.2f}% | Memory: {mem:.2f} MB")
 
 # === Routes ===
 
@@ -117,6 +126,14 @@ def delete_task(task_id):
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({"message": "Flask API is running"}), 200
+
+
+# === Simulate Memory Hog Route ===
+@app.route('/memory-hog', methods=['GET'])
+def memory_hog():
+    logger.info("⚠️ Triggering memory hog...")
+    big_data = [x for x in range(10**7)]  # Simulates large memory usage
+    return jsonify({"message": "Memory hog simulated"}), 200
 
 
 # === App Runner ===
