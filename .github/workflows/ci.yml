@@ -32,21 +32,24 @@ jobs:
         run: |
           docker build -t flask-task-api .
 
-          - name: Run container and wait for Flask app to be ready
-          run: |
-            docker run -d -p 5050:5050 --name flask-container flask-task-api
-            
-            for i in {1..10}; do
-              echo "Attempt $i: Checking if Flask is up..."
-              if curl --silent localhost:5050/tasks; then
-                echo "✅ Flask is up!"
-                break
-              fi
-              sleep 2
-            done
+      - name: Run container and wait for Flask app to be ready
+        run: |
+          docker run -d -p 5050:5050 --name flask-container flask-task-api
 
-            # Fail if the loop didn't break
-            if [ $i -eq 10 ]; then
-              echo "❌ Flask app failed to start in time." >&2
-              exit 1
+          for i in {1..10}; do
+            echo "Attempt $i: Checking if Flask is up..."
+            if curl --silent localhost:5050/tasks; then
+              echo "✅ Flask is up!"
+              break
             fi
+            sleep 2
+          done
+
+          # Fail if the loop didn't break
+          if [ $i -eq 10 ]; then
+            echo "❌ Flask app failed to start in time." >&2
+            exit 1
+          fi
+
+      - name: Stop Docker container
+        run: docker stop flask-container
