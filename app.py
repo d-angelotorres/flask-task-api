@@ -30,7 +30,9 @@ tasks = [
     {"id": 2, "title": "Build REST API", "done": False}
 ]
 
+
 # === Utility: Generate Context for Logs ===
+
 
 def log_context(endpoint):
     return {
@@ -50,13 +52,17 @@ def hello():
 
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
-    logger.info("GET request received", extra=log_context("/tasks"))
+    logger.info(
+        "GET request received", extra=log_context("/tasks")
+        )
     return jsonify(tasks)
 
 
 @app.route('/tasks', methods=['POST'])
 def create_task():
-    logger.info("POST request received", extra=log_context("/tasks"))
+    logger.info(
+        "POST request received", extra=log_context("/tasks")
+        )
     data = request.get_json()
 
     if not data or 'title' not in data:
