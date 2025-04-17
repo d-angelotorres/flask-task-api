@@ -31,6 +31,7 @@ tasks = [
 ]
 
 # === Utility: Generate Context for Logs ===
+
 def log_context(endpoint):
     return {
         "endpoint": endpoint,
@@ -46,10 +47,12 @@ def hello():
     logger.info("Accessed root route", extra=log_context("/"))
     return "Welcome to the Task API!"
 
+
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     logger.info("GET request received", extra=log_context("/tasks"))
     return jsonify(tasks)
+
 
 @app.route('/tasks', methods=['POST'])
 def create_task():
@@ -69,6 +72,7 @@ def create_task():
     logger.info("New task created", extra={**log_context("/tasks"), "task": new_task})
     return jsonify(new_task), 201
 
+
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     logger.info(f"DELETE request received for task {task_id}", extra=log_context(f"/tasks/{task_id}"))
@@ -82,7 +86,9 @@ def delete_task(task_id):
     logger.info(f"Task {task_id} deleted successfully", extra=log_context(f"/tasks/{task_id}"))
     return jsonify({'message': f'Task {task_id} deleted successfully'})
 
+
 # === App Runner ===
+
 if __name__ == '__main__':
     logger.info("🚀 Starting Flask server on http://0.0.0.0:5050")
     app.run(debug=True, host='0.0.0.0', port=5050)
