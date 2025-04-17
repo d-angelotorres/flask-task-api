@@ -54,7 +54,7 @@ def hello():
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     logger.info(
-        "GET request received", 
+        "GET request received",
         extra=log_context("/tasks")
         )
     return jsonify(tasks)
@@ -63,7 +63,7 @@ def get_tasks():
 @app.route('/tasks', methods=['POST'])
 def create_task():
     logger.info(
-        "POST request received", 
+        "POST request received",
         extra=log_context("/tasks")
         )
     data = request.get_json()
@@ -79,7 +79,7 @@ def create_task():
     }
     tasks.append(new_task)
     logger.info(
-        "New task created", 
+        "New task created",
         extra={**log_context("/tasks"), "task": new_task}
         )
     return jsonify(new_task), 201
@@ -88,18 +88,25 @@ def create_task():
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     logger.info(
-        f"DELETE request received for task {task_id}", 
+        f"DELETE request received for task {task_id}",
         extra=log_context(f"/tasks/{task_id}")
         )
-    task_to_delete = next((task for task in tasks if task['id'] == task_id), None)
+    task_to_delete = next(
+    (task for task in tasks if task['id'] == task_id), 
+    None
+)
+
 
     if not task_to_delete:
-        logger.warning(f"Task {task_id} not found", extra=log_context(f"/tasks/{task_id}"))
+        logger.warning(
+    f"Task {task_id} not found", 
+    extra=log_context(f"/tasks/{task_id}")
+)
         return jsonify({'error': 'Task not found'}), 404
 
     tasks.remove(task_to_delete)
     logger.info(
-        f"Task {task_id} deleted successfully", 
+        f"Task {task_id} deleted successfully",
         extra=log_context(f"/tasks/{task_id}")
         )
     return jsonify({'message': f'Task {task_id} deleted successfully'})
