@@ -59,6 +59,7 @@ def get_tasks():
         )
     return jsonify(tasks)
 
+
 @app.route('/tasks', methods=['POST'])
 def create_task():
     logger.info(
@@ -93,14 +94,13 @@ def delete_task(task_id):
     task_to_delete = next(
         (task for task in tasks if task['id'] == task_id),
         None
-)
-
+        )
 
     if not task_to_delete:
         logger.warning(
             f"Task {task_id} not found",
             extra=log_context(f"/tasks/{task_id}")
-)
+            )
         return jsonify({'error': 'Task not found'}), 404
 
     tasks.remove(task_to_delete)
