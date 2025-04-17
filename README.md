@@ -1,6 +1,7 @@
 # 🧪 Flask Task API - Final Project Demo
 
-**D'Angelo Torres – CEN 4802C**
+**D'Angelo Torres**  
+**CEN 4802C – Software Integration, Configuration, and Testing**
 
 A lightweight Flask-based REST API for managing tasks, built and deployed as part of a senior-level Software Integration, Configuration, and Testing course.
 
