@@ -44,17 +44,18 @@ def log_context(endpoint):
 
 # === Routes ===
 
+
 @app.route('/')
 def hello():
     logger.info("Accessed root route", extra=log_context("/"))
     return "Welcome to the Task API!"
 
 
-
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     logger.info(
-        "GET request received", extra=log_context("/tasks")
+        "GET request received", 
+        extra=log_context("/tasks")
         )
     return jsonify(tasks)
 
@@ -62,7 +63,8 @@ def get_tasks():
 @app.route('/tasks', methods=['POST'])
 def create_task():
     logger.info(
-        "POST request received", extra=log_context("/tasks")
+        "POST request received", 
+        extra=log_context("/tasks")
         )
     data = request.get_json()
 
@@ -77,7 +79,8 @@ def create_task():
     }
     tasks.append(new_task)
     logger.info(
-        "New task created", extra={**log_context("/tasks"), "task": new_task}
+        "New task created", 
+        extra={**log_context("/tasks"), "task": new_task}
         )
     return jsonify(new_task), 201
 
@@ -85,7 +88,8 @@ def create_task():
 @app.route('/tasks/<int:task_id>', methods=['DELETE'])
 def delete_task(task_id):
     logger.info(
-        f"DELETE request received for task {task_id}", extra=log_context(f"/tasks/{task_id}")
+        f"DELETE request received for task {task_id}", 
+        extra=log_context(f"/tasks/{task_id}")
         )
     task_to_delete = next((task for task in tasks if task['id'] == task_id), None)
 
@@ -95,7 +99,8 @@ def delete_task(task_id):
 
     tasks.remove(task_to_delete)
     logger.info(
-        f"Task {task_id} deleted successfully", extra=log_context(f"/tasks/{task_id}")
+        f"Task {task_id} deleted successfully", 
+        extra=log_context(f"/tasks/{task_id}")
         )
     return jsonify({'message': f'Task {task_id} deleted successfully'})
 
